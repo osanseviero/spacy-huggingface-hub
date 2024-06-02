@@ -45,12 +45,13 @@ def huggingface_hub_push_cli(
     organization: Optional[str] = typer.Option(None, "--org", "-o", help="Name of organization to which the pipeline should be uploaded"),
     commit_msg: str = typer.Option("Update spaCy pipeline", "--msg", "-m", help="Commit message to use for update"),
     verbose: bool = typer.Option(False, "--verbose", "-V", help="Output additional info for debugging, e.g. the full generated hub metadata"),
+    private: bool = typer.Option(False, "--private", "-p", help="Make the repository private"),
     # fmt: on
 ):
     """
     Push a spaCy pipeline (.whl) to the Hugging Face Hub.
     """
-    push(whl_path, organization, commit_msg, verbose=verbose)
+    push(whl_path, organization, commit_msg, verbose=verbose, private=private)
 
 
 def push(
@@ -60,6 +61,7 @@ def push(
     *,
     silent: bool = False,
     verbose: bool = False,
+    private: bool = False,
 ) -> Dict[str, str]:
     msg = Printer(no_print=silent)
     whl_path = Path(whl_path)
@@ -81,8 +83,7 @@ def push(
     # Create the repo (or clone its content if it's nonempty)
     HfApi().create_repo(
         repo_id=repo_id,
-        # TODO: Can we support private packages as well via a flag?
-        private=False,
+        private=private,
         exist_ok=True,
     )
     msg.info(f"Publishing to repository '{repo_id}'")
