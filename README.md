@@ -55,11 +55,11 @@ If spaCy is already installed in the same environment, this package automaticall
 ### `push`
 
 ```bash
-python -m spacy huggingface-hub push [whl_path] [--org] [--msg] [--local-repo] [--verbose]
+python -m spacy huggingface-hub push [whl_path] [--org] [--msg] [--local-repo] [--verbose] [--private]
 ```
 
 ```bash
-python -m spacy_huggingface_hub push [whl_path] [--org] [--msg] [--local-repo] [--verbose]
+python -m spacy_huggingface_hub push [whl_path] [--org] [--msg] [--local-repo] [--verbose] [--private]
 ```
 
 | Argument             | Type         | Description                                                                                                                   |
@@ -68,6 +68,7 @@ python -m spacy_huggingface_hub push [whl_path] [--org] [--msg] [--local-repo] [
 | `--org`, `-o`        | str          | Optional name of organization to which the pipeline should be uploaded.                                                       |
 | `--msg`, `-m`        | str          | Commit message to use for update. Defaults to `"Update spaCy pipeline"`.                                                      |
 | `--verbose`, `-V`    | bool         | Output additional info for debugging, e.g. the full generated hub metadata.                                                   |
+| `--private`         | bool         | Make the repository private.                                                                                                  |
 
 ### Usage from Python
 
